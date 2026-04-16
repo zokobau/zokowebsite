@@ -1,0 +1,87 @@
+---
+import { Image } from 'astro:assets';
+import imgLeistung1 from '../assets/leistung1.jpg';
+import imgLeistung2 from '../assets/leistung2.jpg';
+import imgLeistung3 from '../assets/leistung3.jpg';
+import imgLeistung4 from '../assets/leistung4.jpg';
+import imgLeistung5 from '../assets/leistung5.jpg';
+import imgLeistung6 from '../assets/leistung6.jpg';
+import imgLeistung7 from '../assets/leistung7.jpg';
+
+const services = [
+  {
+    title: 'Innenausbau & Trockenbau',
+    text: 'Vom Rohbau bis zur fertigen Wand: Wir schaffen Räume mit präzisem Trockenbau und hochwertigem Innenausbau für Ihr Zuhause in Karlsruhe.',
+    image: imgLeistung1,
+    alt: 'Professioneller Innenausbau und Trockenbau in Karlsruhe',
+  },
+  {
+    title: 'Fliesenlegerarbeiten',
+    text: 'Ob Bodenfliesen, Wandfliesen oder komplexe Mosaikarbeiten – wir verlegen Fliesen ästhetisch, fugenfest und langlebig.',
+    image: imgLeistung2,
+    alt: 'Hochwertige Fliesenlegerarbeiten im Badezimmer',
+  },
+  {
+    title: 'Badsanierung',
+    text: 'Ihr Traumbad aus einer Hand. Wir planen und sanieren Bäder komplett – funktional, modern und wasserdicht verarbeitet.',
+    image: imgLeistung3,
+    alt: 'Moderne Badsanierung mit hochwertigen Materialien',
+  },
+  {
+    title: 'Komplettrenovierungen',
+    text: 'Vollständige Renovierung von Wohn- und Gewerberäumen. Termintreue, Sauberkeit und handwerkliche Exzellenz garantiert.',
+    image: imgLeistung4,
+    alt: 'Komplettrenovierung eines Wohnraums in Karlsruhe',
+  },
+  {
+    title: 'Malerarbeiten',
+    text: 'Wandgestaltung, Streicharbeiten und Lackierungen – für ein perfektes Finish in jedem Raum. Farbberatung inklusive.',
+    image: imgLeistung5,
+    alt: 'Professionelle Malerarbeiten und Wandgestaltung in Karlsruhe',
+  },
+  {
+    title: 'Entrümpelung',
+    text: 'Professionelle Entrümpelung und fachgerechte Beseitigung – wir schaffen Platz für Neues. Haushaltsauflösungen inklusive.',
+    image: imgLeistung6,
+    alt: 'Entrümpelung und Haushaltsauflösung in Karlsruhe',
+  },
+  {
+    title: 'Umzüge',
+    text: 'Stressfreier Umzugsservice in Karlsruhe – Transport, Einrichtung und Montage aus einer Hand. Zuverlässig und termingerecht.',
+    image: imgLeistung7,
+    alt: 'Umzugsservice und Transport in Karlsruhe',
+  },
+];
+---
+
+<section id="leistungen" class="bg-white py-20 sm:py-24" aria-labelledby="services-heading">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="text-center">
+      <h2 id="services-heading" class="text-3xl font-bold text-dark sm:text-4xl">Unsere Kernkompetenzen</h2>
+      <p class="mx-auto mt-4 max-w-2xl text-dark/70">
+        Maßgeschneiderte Handwerkslösungen für Ihr Bauvorhaben in Karlsruhe und der Region.
+      </p>
+    </div>
+
+    <div class="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      {services.map((service, index) => (
+        <article class="group flex flex-col overflow-hidden rounded-xl border border-dark/10 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary hover:shadow-lg">
+          <div class="aspect-[4/3] w-full overflow-hidden">
+            <Image
+              src={service.image}
+              alt={service.alt}
+              width={800}
+              height={600}
+              loading={index < 2 ? "eager" : "lazy"}
+              class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+          </div>
+          <div class="flex flex-1 flex-col p-6">
+            <h3 class="text-lg font-semibold text-dark">{service.title}</h3>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-dark/70">{service.text}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Enhanced focus-visible for keyboard navigation */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary;
+  }
+
+  /* Ensure interactive elements have visible focus */
+  a:focus-visible,
+  button:focus-visible {
+    @apply ring-2 ring-primary ring-offset-2;
+  }
+}
+
+:root {
+  --color-primary: 196 164 78;
+  --color-dark: 35 35 35;
+  --color-light: 255 255 255;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
+body {
+  @apply bg-light text-dark font-sans antialiased;
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-primary text-dark font-semibold rounded hover:brightness-110 transition-all duration-300;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 border-2 border-primary text-primary font-semibold rounded hover:bg-primary hover:text-dark transition-all duration-300;
+  }
+}

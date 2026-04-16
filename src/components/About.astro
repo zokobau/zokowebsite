@@ -1,0 +1,44 @@
+---
+import { Image } from 'astro:assets';
+import uberunsImg from '../assets/uberunsneu.jpg';
+---
+
+<section id="about" class="bg-white py-20 sm:py-24" aria-labelledby="about-heading">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="grid items-center gap-12 lg:grid-cols-2">
+      <!-- Bild -->
+      <div class="relative mx-auto w-full max-w-sm lg:mx-0">
+        <div class="aspect-[3/4] w-full overflow-hidden rounded-2xl shadow-lg">
+          <Image
+            src={uberunsImg}
+            alt="Zoran Jovic, Inhaber von Zoko Bauunternehmen"
+            width={600}
+            height={800}
+            loading="lazy"
+            class="h-full w-full object-cover"
+          />
+        </div>
+        <div class="absolute bottom-4 left-4 rounded-lg bg-dark/80 px-4 py-2 backdrop-blur-sm">
+          <p class="text-sm font-semibold text-white">Zoran Jovic</p>
+          <p class="text-xs text-white/80">Inhaber</p>
+        </div>
+      </div>
+
+      <!-- Text -->
+      <div>
+        <h2 id="about-heading" class="text-3xl font-bold text-dark sm:text-4xl">
+          Persönlich. Professionell. Aus Karlsruhe.
+        </h2>
+        <p class="mt-6 text-lg leading-relaxed text-dark/80">
+          Mein Name ist <strong>Zoran Jovic</strong> und ich leite das <strong>Zoko Bauunternehmen</strong> als zuverlässiger Partner aus Karlsruhe. Seit über einem Jahrzehnt verwandle ich Wohn- und Gewerberäume in Räume, in denen sich Menschen wohlfühlen.
+        </p>
+        <p class="mt-4 text-lg leading-relaxed text-dark/80">
+          Egal ob Trockenbau, Badsanierung oder eine Komplettrenovierung – mein Anspruch ist immer derselbe: <strong>meisterhafte Qualität, pünktliche Termine und eine saubere Baustelle</strong>. Bei mir bekommen Sie keinen anonymen Handwerksbetrieb, sondern einen verlässlichen Partner, der Ihr Projekt persönlich betreut.
+        </p>
+        <p class="mt-4 text-lg leading-relaxed text-dark/80">
+          Ich freue mich darauf, auch Ihr Vorhaben in Karlsruhe und Umgebung umzusetzen.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

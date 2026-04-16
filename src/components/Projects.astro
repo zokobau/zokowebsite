@@ -1,0 +1,152 @@
+---
+import { Image } from 'astro:assets';
+import img1 from '../assets/WhatsApp Image 2026-04-14 at 15.04.31.jpeg';
+import img2 from '../assets/WhatsApp Image 2026-04-14 at 15.04.31 (1).jpeg';
+import img3 from '../assets/WhatsApp Image 2026-04-14 at 15.04.31 (2).jpeg';
+import img4 from '../assets/WhatsApp Image 2026-04-14 at 15.04.31 (3).jpeg';
+import img5 from '../assets/WhatsApp Image 2026-04-14 at 15.04.31 (4).jpeg';
+import img6 from '../assets/WhatsApp Image 2026-04-14 at 15.04.32.jpeg';
+import img7 from '../assets/WhatsApp Image 2026-04-14 at 15.04.32 (1).jpeg';
+import img8 from '../assets/WhatsApp Image 2026-04-14 at 15.04.33.jpeg';
+
+const images = [
+  { src: img1, alt: 'Renovierungsprojekt von Zoko Bauunternehmen in Karlsruhe' },
+  { src: img2, alt: 'Trockenbau und Innenausbau Projekt' },
+  { src: img3, alt: 'Badsanierung durch Zoko Bauunternehmen' },
+  { src: img4, alt: 'Fliesenarbeiten im Wohnraum' },
+  { src: img5, alt: 'Komplettrenovierung eines Raums in Karlsruhe' },
+  { src: img6, alt: 'Malerarbeiten und Wandgestaltung Projekt' },
+  { src: img7, alt: 'Entrümpelung und Haushaltsauflösung' },
+  { src: img8, alt: 'Umzugsservice und Transportarbeiten' },
+];
+---
+
+<section id="projekte" class="bg-white py-20 sm:py-24" aria-labelledby="projects-heading">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="text-center">
+      <h2 id="projects-heading" class="text-3xl font-bold text-dark sm:text-4xl">Unsere Projekte</h2>
+      <p class="mx-auto mt-4 max-w-2xl text-dark/70">
+        Ein Auszug aus unseren abgeschlossenen Bauprojekten in Karlsruhe und Umgebung.
+      </p>
+    </div>
+
+    <div class="relative mt-14" aria-roledescription="carousel" aria-label="Projektbilder">
+      <div class="overflow-hidden rounded-xl" data-slider-viewport>
+        <div
+          class="flex transition-transform duration-500 ease-out"
+          data-slider-track
+          aria-live="polite"
+        >
+          {images.map((img, index) => (
+            <div class="w-full flex-shrink-0" role="group" aria-roledescription="slide" aria-label={`Bild ${index + 1} von ${images.length}`}>
+              <div class="aspect-[16/10] w-full overflow-hidden">
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  width={1200}
+                  height={750}
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                  class="h-full w-full object-cover"
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Prev Button -->
+      <button
+        type="button"
+        class="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-white/90 p-2 text-dark shadow-md transition hover:bg-primary hover:text-white focus:outline-none focus:ring-2 focus:ring-primary sm:left-4 sm:p-3"
+        aria-label="Vorheriges Bild"
+        data-slider-prev
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+
+      <!-- Next Button -->
+      <button
+        type="button"
+        class="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-white/90 p-2 text-dark shadow-md transition hover:bg-primary hover:text-white focus:outline-none focus:ring-2 focus:ring-primary sm:right-4 sm:p-3"
+        aria-label="Nächstes Bild"
+        data-slider-next
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+
+      <!-- Dots -->
+      <div class="mt-6 flex justify-center gap-2" role="tablist" aria-label="Projektbilder-Navigation">
+        {images.map((_, index) => (
+          <button
+            type="button"
+            class="h-2.5 w-2.5 rounded-full bg-dark/30 transition hover:bg-dark/50 focus:outline-none focus:ring-2 focus:ring-primary"
+            aria-label={`Zu Bild ${index + 1} springen`}
+            aria-selected={index === 0 ? 'true' : 'false'}
+            data-slider-dot
+            data-index={index}
+            role="tab"
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    const slider = document.getElementById('projekte');
+    if (!slider) return;
+
+    const track = slider.querySelector('[data-slider-track]') as HTMLElement | null;
+    const prevBtn = slider.querySelector('[data-slider-prev]') as HTMLButtonElement | null;
+    const nextBtn = slider.querySelector('[data-slider-next]') as HTMLButtonElement | null;
+    const dots = Array.from(slider.querySelectorAll('[data-slider-dot]')) as HTMLButtonElement[];
+
+    if (!track || !prevBtn || !nextBtn || dots.length === 0) return;
+
+    let current = 0;
+    const total = dots.length;
+
+    function update() {
+      track.style.transform = `translateX(-${current * 100}%)`;
+      dots.forEach((dot, idx) => {
+        const isActive = idx === current;
+        dot.setAttribute('aria-selected', String(isActive));
+        if (isActive) {
+          dot.classList.remove('bg-dark/30');
+          dot.classList.add('bg-primary');
+        } else {
+          dot.classList.add('bg-dark/30');
+          dot.classList.remove('bg-primary');
+        }
+      });
+    }
+
+    prevBtn.addEventListener('click', () => {
+      current = current > 0 ? current - 1 : total - 1;
+      update();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      current = current < total - 1 ? current + 1 : 0;
+      update();
+    });
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        const idx = Number(dot.getAttribute('data-index'));
+        if (!Number.isNaN(idx)) {
+          current = idx;
+          update();
+        }
+      });
+    });
+
+    // Initialize dots state
+    update();
+  })();
+</script>

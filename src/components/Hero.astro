@@ -1,0 +1,37 @@
+---
+import { Image } from 'astro:assets';
+import heroBg from '../assets/hero.jpg';
+---
+
+<section class="relative flex min-h-[80vh] items-center justify-center overflow-hidden" aria-labelledby="hero-heading">
+  <!-- Optimized Background Image -->
+  <div class="absolute inset-0 z-0">
+    <Image
+      src={heroBg}
+      alt="Modernes Bauvorhaben in Karlsruhe"
+      width={1920}
+      height={1080}
+      class="h-full w-full object-cover"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="absolute inset-0 bg-gradient-to-b from-dark/80 via-dark/85 to-dark/95"></div>
+  </div>
+
+  <div class="relative z-10 mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+    <h1 id="hero-heading" class="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+      Premium Innenausbau & Renovierung in Karlsruhe
+    </h1>
+    <p class="mx-auto mt-6 max-w-2xl text-lg text-white/90 sm:text-xl">
+      Von der Badsanierung bis zum Trockenbau – Zoko Bauunternehmen ist Ihr zuverlässiger Partner für meisterhafte Qualität.
+    </p>
+    <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+      <a href="#kontakt" class="btn-primary w-full text-center sm:w-auto">
+        Kostenlose Beratung anfordern
+      </a>
+      <a href="#leistungen" class="btn-secondary w-full text-center sm:w-auto">
+        Unsere Leistungen
+      </a>
+    </div>
+  </div>
+</section>

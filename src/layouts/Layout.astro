@@ -1,0 +1,101 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CookieBanner from '../components/CookieBanner.astro';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
+import '../styles/base.css';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+}
+
+const { title, description, ogImage = '/og-image.jpg' } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://zoko-bauunternehmen.de');
+
+const schemaOrg = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'Zoko Bauunternehmen',
+  description: 'Ihr Handwerker in Karlsruhe für Renovierung, Trockenbau, Badsanierung, Fliesenlegerarbeiten, Malerarbeiten, Entrümpelung und Umzüge. Premium Qualität von Zoran Jovic.',
+  url: canonicalURL.toString(),
+  telephone: ['+49 157 56463902', '+49 176 47314186'],
+  email: 'kontakt@zoko-bauunternehmen.de',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Marienstr. 61',
+    addressLocality: 'Karlsruhe',
+    postalCode: '76137',
+    addressCountry: 'DE'
+  },
+  founder: {
+    '@type': 'Person',
+    name: 'Zoran Jovic'
+  },
+  areaServed: {
+    '@type': 'City',
+    name: 'Karlsruhe'
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Handwerksleistungen',
+    itemListElement: [
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Innenausbau & Trockenbau' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Fliesenlegerarbeiten' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Badsanierung' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Komplettrenovierung' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Malerarbeiten' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Entrümpelung' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Umzüge' } }
+    ]
+  },
+  priceRange: '€€'
+};
+---
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#232323" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site || 'https://zoko-bauunternehmen.de')} />
+    <meta property="og:locale" content="de_DE" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, Astro.site || 'https://zoko-bauunternehmen.de')} />
+
+    <!-- Preconnect to external API for faster form submission -->
+    <link rel="preconnect" href="https://api.web3forms.com" crossorigin />
+
+    <!-- Schema.org -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaOrg)} />
+
+    <title>{title}</title>
+  </head>
+  <body class="bg-light text-dark">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-[70] focus:bg-primary focus:text-dark focus:px-4 focus:py-2 focus:font-semibold">
+      Zum Hauptinhalt springen
+    </a>
+    <Header />
+    <slot />
+    <Footer />
+    <CookieBanner />
+  </body>
+</html>
