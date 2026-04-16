@@ -39,14 +39,14 @@ const images = [
         >
           {images.map((img, index) => (
             <div class="w-full flex-shrink-0" role="group" aria-roledescription="slide" aria-label={`Bild ${index + 1} von ${images.length}`}>
-              <div class="aspect-[16/10] w-full overflow-hidden">
+              <div class="aspect-[16/10] w-full overflow-hidden bg-dark/10">
                 <Image
                   src={img.src}
                   alt={img.alt}
                   width={1200}
                   height={750}
                   loading={index === 0 ? 'eager' : 'lazy'}
-                  class="h-full w-full object-cover"
+                  class="h-full w-full object-contain"
                 />
               </div>
             </div>
